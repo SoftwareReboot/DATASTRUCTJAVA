@@ -1,0 +1,72 @@
+public class QueueArray{
+   private Object[] items; // Array to hold the elements in the queue
+   private int count; // Counter to keep track of the number of elements in the queue
+   
+   // Constructor to initialize the queue with a specified size
+   public QueueArray(int size){
+      items = new Object[size]; // Create an array of the given size
+      count = 0; // Initialize count to 0 as the queue is initially empty
+   }
+   
+   // Method to check if the queue is empty
+   public boolean isEmpty(){
+      // If count is 0, the queue is empty
+      if(count == 0)
+         return true;
+      else
+         return false;
+   }
+   
+   // Method to check if the queue is full
+   public boolean isFull(){
+      // If count is equal to the array's length, the queue is full
+      return count == items.length;
+   }
+   
+   // Method to add an element to the queue
+   public boolean enqueue(Object value){
+      // Only add the element if the queue is not full
+      if(!isFull()){
+         items[count++] = value; // Add the element to the array and increment count
+         return true; // Successfully added
+      }
+      return false; // Queue is full, cannot add element
+   }
+   
+   // Method to remove the front element from the queue
+   public boolean dequeue(){
+      // Only remove if the queue is not empty
+      if(!isEmpty()){
+         // Shift all elements to the left to remove the front element
+         for(int i = 1; i < count; i++){
+            items[i - 1] = items[i]; // Move each element one position left
+         }
+         items[count - 1] = null; // Clear the last element (now a duplicate)
+         count--; // Decrement count as one element is removed
+         return true; // Successfully removed
+      }
+      return false; // Queue is empty, cannot remove element
+   }
+   
+   // Method to get the front element of the queue without removing it
+   public Object front(){
+      // If the queue is not empty, return the first element
+      if(!isEmpty()){
+         return items[0];
+      }
+      return false; // If queue is empty, return false (this could be improved to return null or throw an exception)
+   }
+   
+   // Method to display all the elements in the queue
+   public void display(){
+      // If the queue is not empty, print each element
+      if(!isEmpty()){
+         for(int i = 0; i < count; i++){
+            System.out.println("[" + items[i] + "]"); // Print each element in the queue
+         }
+         System.out.println(); // Print a newline after displaying all elements
+      } else {
+         System.out.println("Queue is Empty..."); // If the queue is empty, print a message
+      }
+   }
+}
